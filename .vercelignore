@@ -1,0 +1,6 @@
+docs
+analysis
+tests
+.claude
+*.md
+!README.md

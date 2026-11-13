@@ -51,7 +51,7 @@ export function ButtonLink({
     <motion.span whileHover={{ y: -1 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 500, damping: 30 }} className="inline-flex">
       <Link
         href={href}
-        className={cn("focus-ring inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors", variants[variant], sizes[size], className)}
+        className={cn("focus-ring inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold transition-colors", variants[variant], sizes[size], className)}
         {...rest}
       >
         {children}
