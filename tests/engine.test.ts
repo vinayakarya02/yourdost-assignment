@@ -18,6 +18,10 @@ console.log("Safety screen");
 t("flags explicit self-harm intent", () => assert.equal(screenText("I want to kill myself").urgent, true));
 t("flags 'don't want to be alive'", () => assert.equal(screenText("honestly I don't want to be alive anymore").urgent, true));
 t("flags Hinglish phrase", () => assert.equal(screenText("kabhi kabhi marna chahta hoon").urgent, true));
+for (const s of ["Sometimes I think about ending my life", "I keep thinking of taking my own life", "I wish I was dead", "I'm not safe at home", "i don't feel safe", "I took an overdose", "I don't want to be here anymore", "no point in going on"])
+  t(`flags: "${s}"`, () => assert.equal(screenText(s).urgent, true));
+for (const s of ["I feel safe at home now", "I need to jump off this call early", "work is hurting my sleep", "I'm ending my day early"])
+  t(`does NOT flag: "${s}"`, () => assert.equal(screenText(s).urgent, false));
 t("does NOT flag ordinary sadness", () => assert.equal(screenText("I feel really sad and stressed and tired").urgent, false));
 t("does NOT flag work idiom 'deadline is killing me'", () => assert.equal(screenText("this deadline is killing me").urgent, false));
 t("does NOT flag 'my job is not safe'", () => assert.equal(screenText("my job is not safe after layoffs").urgent, false));

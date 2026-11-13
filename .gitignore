@@ -9,3 +9,7 @@ next-env.d.ts
 __pycache__
 docs/src/_preview
 .claude
+
+.vercel
+.env*
+!.env.example

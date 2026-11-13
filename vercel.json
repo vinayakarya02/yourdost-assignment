@@ -1,0 +1,17 @@
+{
+  "services": {
+    "yourdost-wellbeing-compass": {
+      "root": ".",
+      "framework": "nextjs"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": {
+        "type": "service",
+        "service": "yourdost-wellbeing-compass"
+      }
+    }
+  ]
+}

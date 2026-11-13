@@ -2,6 +2,8 @@
 
 Three tasks for the YourDOST Product Manager assignment, in one repository.
 
+**Live demo:** https://yourdost-wellbeing-compass.vercel.app (Vercel · rule-based mode, no API key configured)
+
 | Task | Deliverable |
 |---|---|
 | **1. Parents & online gaming survey** | [Infographic PNG](docs/task1-gaming-infographic.png) · [Infographic PDF](docs/task1-gaming-infographic.pdf) · [Analysis report (2 pp)](docs/task1-gaming-analysis.pdf) · [Analysis script](analysis/analysis.py) · [Clean data](analysis/survey_clean.csv) · [All computed figures](analysis/results.json) |
@@ -34,7 +36,7 @@ An AI-assisted navigator that helps employees and students find one appropriate 
 ```bash
 npm install
 npm run dev            # http://localhost:3000
-npm test               # 21 engine / safety / matching / validation tests
+npm test               # 33 engine / safety / matching / validation tests
 npm run build && npm start
 ```
 
@@ -66,7 +68,7 @@ render.yaml     Render Blueprint
 
 | Check | Result |
 |---|---|
-| Unit tests (`npm test`) | **21/21 pass**: safety screen incl. false-positive cases, rule engine, matching, API validation |
+| Unit tests (`npm test`) | **33/33 pass**: safety screen incl. phrasing variants and false-positive cases, rule engine, matching, API validation |
 | TypeScript (`tsc --noEmit`) | Pass |
 | Production build (`next build`) | Pass; all pages static except `/api/recommend` |
 | Check-in navigation, validation, back, skip | Pass (browser) |
@@ -83,7 +85,10 @@ render.yaml     Render Blueprint
 | Privacy: free-text note never in local/session storage | Pass |
 | Browser console errors | None from the app (missing `/favicon.ico` fixed) |
 
-## Deploy to Render
+## Deployment
+Production runs on **Vercel** (project `yourdost-wellbeing-compass`, framework preset Next.js, deployed with `vercel deploy --prod`). Set `ANTHROPIC_API_KEY` under Project → Settings → Environment Variables to enable the AI path.
+
+### Alternative: Render
 `render.yaml` defines a Node web service (`npm ci && npm run build` → `npm start`, health check `/api/recommend`).
 
 1. Render Dashboard → **New → Blueprint** → select this repository → **Apply**.
