@@ -1,0 +1,131 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Wellbeing Compass – product decisions</title>
+<link rel="stylesheet" href="atmosphere.css">
+<style>
+body{font-size:8.3pt;line-height:1.42}
+h1{font-size:23pt;margin:1.5mm 0 2mm} .lead{font-size:9.4pt}
+h2{font-size:10.6pt;margin:3.2mm 0 1.3mm} h2 .n{width:16px;height:16px;font-size:7pt}
+table{font-size:7.6pt;margin:1mm 0 2mm} td{padding:1.05mm 1.6mm} th{padding:1.2mm 1.6mm;font-size:6.8pt}
+ul{margin-bottom:1mm} li{margin-bottom:.3mm} p{margin-bottom:1.3mm}
+.card{padding:2.8mm 3.2mm} .card h3{font-size:8.8pt;margin-bottom:.8mm}
+.journey{display:flex;gap:2.2mm;margin:1mm 0 1mm}
+.journey div{flex:1;border-radius:9px;background:#F3EFFD;padding:1.8mm 2mm;font-size:7.2pt;color:var(--soft)}
+.journey b{display:block;color:var(--midnight);font-size:7.8pt}
+</style></head><body>
+<section class="page">
+ <div class="runhead"><span class="brand"><span class="orb"></span>YourDOST · Task 3</span><span>Product decisions · Wellbeing Compass</span></div>
+ <div class="eyebrow">AI-powered wellbeing navigator</div>
+ <h1>Wellbeing Compass. <em>Not sure where to start? Let&rsquo;s find your next step together.</em></h1>
+ <p class="lead">A gentle, three-minute check-in that helps an employee or student work out what kind of support might help, and then guides them to one appropriate next step inside YourDOST. It is not a therapist, a diagnosis or a crisis service.</p>
+
+ <div class="grid2" style="gap:4mm">
+  <div>
+   <h2><span class="n">1</span>Problem identified</h2>
+   <p>YourDOST already offers counselling, self-help, assessments and programmes, but users must <strong>self-diagnose which door to open</strong>. People who feel &lsquo;off&rsquo; but can&rsquo;t name it either bounce, or default to the highest-commitment option (a therapist) or the lowest (an article). Neither reliably helps, and both waste corporate benefit spend.</p>
+   <h2><span class="n">2</span>Target user</h2>
+   <p>First-time and low-engagement users in corporate and campus programmes: people who are stressed, sleeping badly or feeling low, who haven&rsquo;t used counselling before and won&rsquo;t fill in a long form.</p>
+   <h2><span class="n">3</span>Why AI is useful here</h2>
+   <ul>
+    <li>People describe problems in their own words (&ldquo;I lie awake replaying work&rdquo;); an LLM can map that to the right support category better than fixed menus.</li>
+    <li>It can write a warm, specific summary and explanation, which builds trust that the suggestion fits.</li>
+    <li>It must <strong>never</strong> choose outside the catalogue, diagnose or assess risk. Those stay deterministic.</li>
+   </ul>
+  </div>
+  <div>
+   <h2><span class="n">4</span>Proposed solution</h2>
+   <p>A one-question-at-a-time check-in (5 required, 1 optional free text) &rarr; a results page with <strong>one primary next step</strong>, transparent &lsquo;why this may help&rsquo; reasons, and three support options (a matched therapist, self-help, a programme). Continuity features (save, keep this counsellor, post-session feedback) let users come back without pressure.</p>
+   <h2><span class="n">5</span>User journey</h2>
+   <div class="journey">
+    <div><b>Land</b>Calm hero, 4 doors</div><div><b>Check in</b>6 screens, skip optional</div><div><b>Results</b>1 step + reasons</div><div><b>Act</b>Book, read, join</div><div><b>Continue</b>Save, keep, rematch</div>
+   </div>
+   <p class="small muted">The safety screen runs on every free-text keystroke and again on the server. Crisis language replaces the journey with human support.</p>
+   <h2><span class="n">6</span>Key features</h2>
+   <ul>
+    <li>Immersive check-in: progress, back/skip, validation, privacy notes</li>
+    <li>Personalised results: summary, primary step, reasons, uncertainty note</li>
+    <li>Therapist discovery: search, 6 filters, explainable match score, drawer profile, demo booking with slot validation and confirmation</li>
+    <li>Resource library: 7 topics, 5 formats, working guided activities, video preview, non-diagnostic reflections, programme enrolment</li>
+    <li>My Space: saved items, demo sessions, 3-question post-session feedback, &lsquo;keep this counsellor&rsquo;</li>
+    <li>Always-visible &lsquo;Need help now?&rsquo; sheet</li>
+   </ul>
+  </div>
+ </div>
+
+ <h2><span class="n">7</span>AI architecture</h2>
+ <svg viewBox="0 0 720 118" width="100%" font-family="Plus Jakarta Sans">
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#7770C9"/></marker></defs>
+  <rect x="0" y="30" width="105" height="58" rx="12" fill="#F3EFFD"/><text x="52" y="54" text-anchor="middle" font-size="10" font-weight="700" fill="#25243A">Check-in</text><text x="52" y="70" text-anchor="middle" font-size="8" fill="#4A4960">5 choices + note</text>
+  <line x1="107" y1="59" x2="130" y2="59" stroke="#7770C9" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="134" y="30" width="118" height="58" rx="12" fill="#FCEEE9"/><text x="193" y="52" text-anchor="middle" font-size="10" font-weight="700" fill="#25243A">1 · Safety rules</text><text x="193" y="67" text-anchor="middle" font-size="8" fill="#4A4960">regex, client + server</text><text x="193" y="80" text-anchor="middle" font-size="8" fill="#9A4A33">urgent → crisis panel</text>
+  <line x1="254" y1="59" x2="277" y2="59" stroke="#7770C9" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="281" y="30" width="118" height="58" rx="12" fill="#fff" stroke="#E2DFEA"/><text x="340" y="52" text-anchor="middle" font-size="10" font-weight="700" fill="#25243A">2 · Rule engine</text><text x="340" y="67" text-anchor="middle" font-size="8" fill="#4A4960">baseline step +</text><text x="340" y="80" text-anchor="middle" font-size="8" fill="#4A4960">candidate catalogue</text>
+  <line x1="401" y1="59" x2="424" y2="59" stroke="#7770C9" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="428" y="6" width="140" height="106" rx="12" fill="#25243A"/><text x="498" y="28" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">3 · Claude (optional)</text><text x="498" y="44" text-anchor="middle" font-size="8" fill="#D9D6F5">/api/recommend (server)</text><text x="498" y="58" text-anchor="middle" font-size="8" fill="#D9D6F5">JSON schema output</text><text x="498" y="72" text-anchor="middle" font-size="8" fill="#D9D6F5">effort low · 15s timeout</text><text x="498" y="86" text-anchor="middle" font-size="8" fill="#D9D6F5">zod validate + banned terms</text><text x="498" y="100" text-anchor="middle" font-size="8" fill="#B9A5F5">fail → rules result</text>
+  <line x1="570" y1="59" x2="593" y2="59" stroke="#7770C9" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="597" y="30" width="123" height="58" rx="12" fill="#EAF3EE"/><text x="658" y="52" text-anchor="middle" font-size="10" font-weight="700" fill="#25243A">4 · Merge</text><text x="658" y="67" text-anchor="middle" font-size="8" fill="#3E6B52">IDs from catalogue only</text><text x="658" y="80" text-anchor="middle" font-size="8" fill="#3E6B52">safety can only go up</text>
+ </svg>
+ <p>The LLM receives the structured answers, the note (as untrusted user text), the rule baseline and an allow-list of resource IDs. It returns a JSON schema: summary, support needs, next-step type, title, description, reasons, professional-support flag, resource IDs, uncertainty, safety level. The server rejects anything off-schema, any ID outside the catalogue, and any copy containing diagnostic language, and then serves the rule result instead. Therapist and programme choice stay deterministic (the Task 2 matching engine). The API key lives only in a server environment variable.</p>
+ <div class="footer"><span>YourDOST PM Assignment · Task 3 product decisions</span><span>All therapists and content in the prototype are fictional demo data</span><span>1 / 2</span></div>
+</section>
+
+<section class="page">
+ <div class="runhead"><span class="brand"><span class="orb"></span>YourDOST · Task 3</span><span>Product decisions · Wellbeing Compass</span></div>
+ <div class="grid2" style="gap:4mm">
+  <div>
+   <h2 style="margin-top:0"><span class="n">8</span>Rule-based fallback</h2>
+   <p>The app is fully functional without an API key. A deterministic engine (<code>lib/engine.ts</code>) maps the answers to a next step:</p>
+   <table>
+    <tr><th>Signal</th><th>Next step</th></tr>
+    <tr><td>Prefers talking to a professional</td><td>Counselling</td></tr>
+    <tr><td>High impact + struggling (not &lsquo;independent&rsquo;)</td><td>Counselling, gently framed</td></tr>
+    <tr><td>Guided preference / sleep concern</td><td>Programme or guided exercise</td></tr>
+    <tr><td>Independent, high impact</td><td>Self-reflection + &lsquo;talking may help&rsquo; note</td></tr>
+    <tr><td>Independent, light impact</td><td>Curated resources</td></tr>
+   </table>
+   <p>An internal &lsquo;support signal&rsquo; (impact + state + duration) is <strong>never shown</strong> and is not a severity score. It only decides whether professional support is mentioned as &lsquo;worth considering&rsquo;. If the API is down or slow, the server, and then the browser itself, fall back to the same engine, and the results page labels the mode used.</p>
+
+   <h2><span class="n">9</span>Assumptions &amp; trade-offs</h2>
+   <ul>
+    <li><strong>One primary step, not a menu:</strong> less choice overload, at the risk of a wrong first guess. Mitigated by two alternatives and &lsquo;edit answers&rsquo;.</li>
+    <li><strong>LLM writes, rules decide:</strong> a little less &lsquo;magic&rsquo; for far more predictability, safety and testability.</li>
+    <li><strong>Regex safety screen:</strong> transparent and instant but imperfect. It errs toward showing help; it is a routing aid, not risk detection.</li>
+    <li><strong>No accounts in the prototype:</strong> state lives in the browser, which is enough to demonstrate continuity without collecting identity.</li>
+    <li><strong>3D hero:</strong> lazy-loaded, with a CSS fallback for no-WebGL, low-memory devices and reduced motion.</li>
+   </ul>
+  </div>
+  <div>
+   <h2 style="margin-top:0"><span class="n">10</span>Safety &amp; privacy decisions</h2>
+   <ul>
+    <li>Deterministic crisis screen <strong>before</strong> any AI, on client and server; urgent language stops recommendations and shows 112 and Tele-MANAS 14416 plus a human-support request.</li>
+    <li>Ordinary sadness, stress or anxiety is <em>not</em> treated as an emergency (unit-tested, including &ldquo;this deadline is killing me&rdquo;).</li>
+    <li>The AI can raise the safety level but never lower it below the rules.</li>
+    <li>No diagnoses, labels or severity scores anywhere; reflections say &ldquo;not a test&rdquo;.</li>
+    <li>The free-text note is never stored. Only structured answers go to <code>sessionStorage</code>; saved items and demo bookings go to <code>localStorage</code> (verified in the browser). The server logs only error classes, never content.</li>
+    <li>No names, emails or phone numbers are collected. Security headers are set and the API key stays server-side.</li>
+   </ul>
+
+   <h2><span class="n">11</span>Success metrics</h2>
+   <table>
+    <tr><th>Product engagement</th><th>Definition</th></tr>
+    <tr><td>Check-in completion</td><td>started &rarr; results shown</td></tr>
+    <tr><td>Recommendation engagement</td><td>results &rarr; any option opened</td></tr>
+    <tr><td>Recommendation &rarr; action</td><td>primary step started</td></tr>
+    <tr><td>Therapist profile views · Booking conversion</td><td>profile opened · booked / viewed</td></tr>
+    <tr><td>Self-help completion</td><td>activity finished / started</td></tr>
+    <tr><td>Return engagement</td><td>back within 14 days</td></tr>
+    <tr><td>User-reported usefulness</td><td>&lsquo;Was this helpful?&rsquo; yes-rate</td></tr>
+    <tr><th colspan="2">Wellbeing outcomes (separate, clinical)</th></tr>
+    <tr><td colspan="2">A validated wellbeing measure over 4&ndash;8 weeks among users who opt in, owned by the clinical team. Engagement shows that support is easier to reach; it is <strong>not</strong> evidence that people feel better.</td></tr>
+   </table>
+  </div>
+ </div>
+
+ <h2><span class="n">12</span>Future improvements</h2>
+ <div class="grid3">
+  <div class="card mist"><h3>Validate</h3><ul class="small"><li>Clinician review of 50 scripted check-ins (AI vs rules)</li><li>Red-team the safety screen in Hindi, Hinglish and regional languages</li><li>Moderated usability tests with 8&ndash;10 first-time users</li></ul></div>
+  <div class="card sage"><h3>Build</h3><ul class="small"><li>Real catalogue and live therapist availability APIs</li><li>Authenticated continuity across devices; post-session feedback loop into matching weights</li><li>Multilingual check-in</li></ul></div>
+  <div class="card peach"><h3>Learn</h3><ul class="small"><li>A/B test &lsquo;one step&rsquo; vs &lsquo;three options&rsquo;</li><li>Calibrate the Task 2 weights on outcome labels</li><li>Aggregated, anonymised insights for HR (k &ge; 10)</li></ul></div>
+ </div>
+ <div class="callout small" style="margin-top:3mm"><strong>Testing status:</strong> 21 automated tests (safety screen, rule engine, matching, API validation) pass, and every user journey was exercised in the browser in rule-based mode. No Anthropic API key was available, so <strong>the live Claude path has not been exercised</strong>. It is implemented with schema validation and automatic fallback, and needs a smoke test once a key is added.</div>
+ <div class="footer"><span>YourDOST PM Assignment · Task 3 product decisions</span><span>Prototype repository: see README</span><span>2 / 2</span></div>
+</section>
+</body></html>

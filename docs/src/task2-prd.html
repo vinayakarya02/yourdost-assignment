@@ -1,0 +1,346 @@
+<!doctype html><html><head><meta charset="utf-8"><title>YourDOST Match – Smart Therapist Matching PRD</title>
+<link rel="stylesheet" href="atmosphere.css">
+<style>
+body{font-size:8.8pt;line-height:1.48}
+h2{font-size:12pt;margin:4.5mm 0 1.8mm} h1{font-size:25pt}
+.p1page h2{margin:3.6mm 0 1.5mm} .p1page .lead{font-size:9.8pt}
+.problem .card{padding:2.6mm 3.2mm}
+table{font-size:8pt} td{padding:1.4mm 1.9mm}
+.problem{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4mm}
+.problem .card h3{font-size:9pt;margin-bottom:.8mm}
+.problem .card p{font-size:8pt;margin:0}
+.persona{display:grid;grid-template-columns:repeat(3,1fr);gap:3.5mm}
+.persona .card{padding:3.5mm}
+.avatar{width:30px;height:30px;border-radius:30%;display:inline-block;margin-bottom:1.5mm}
+.flow{display:flex;align-items:stretch;gap:0;margin:2mm 0 3mm}
+.flow .s{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:2.4mm 2.4mm;font-size:7.6pt;color:var(--soft);position:relative;margin-right:4mm}
+.flow .s:last-child{margin-right:0}
+.flow .s b{display:block;color:var(--midnight);font-size:8.2pt;margin-bottom:.6mm}
+.flow .s:not(:last-child)::after{content:"→";position:absolute;right:-3.6mm;top:42%;color:var(--indigo);font-weight:800}
+.flow .s .t{display:inline-block;font-size:6.6pt;font-weight:700;letter-spacing:.1em;color:var(--indigo-deep);text-transform:uppercase;margin-bottom:.6mm}
+.wbar{display:flex;height:22px;border-radius:8px;overflow:hidden;margin:2mm 0 1mm;font-size:7.2pt;font-weight:700;color:#fff}
+.wbar span{display:grid;place-items:center}
+.req td:first-child{white-space:nowrap;font-weight:700;color:var(--indigo-ink)}
+.tag{font-size:6.8pt;font-weight:800;padding:.3mm 1.6mm;border-radius:99px;white-space:nowrap}
+.p0{background:#E6DDFB;color:#3F3A86}.p1{background:#DCEBE2;color:#3E6B52}.p2{background:#FBE2D9;color:#9A4A33}
+.cols2{columns:2;column-gap:6mm}
+.cols2 li{break-inside:avoid}
+</style></head><body>
+
+<!-- PAGE 1 -->
+<section class="page p1page">
+ <div class="runhead"><span class="brand"><span class="orb"></span>YourDOST · Task 2</span><span>Product requirements document · v1.0</span></div>
+ <div class="eyebrow">Smart therapist matching</div>
+ <h1>YourDOST Match. <em>Find the right person to talk to.</em></h1>
+ <p class="lead">The best therapist isn&rsquo;t the most popular one. It&rsquo;s the one who fits the person&rsquo;s needs, preferences, availability and continuity. This PRD defines a hybrid, explainable matching system that replaces browse-and-filter with three well-reasoned suggestions, while always leaving the choice with the user.</p>
+
+ <div class="grid3" style="margin-top:3mm">
+  <div class="card mist"><div class="eyebrow" style="margin-bottom:1mm">North Star</div><p style="margin:0;color:var(--midnight);font-weight:600">Successful first-session-to-follow-up continuity rate</p><p class="small" style="margin:1mm 0 0">Users who complete a first session and book a second with the same therapist within 21 days.</p></div>
+  <div class="card sage"><div class="eyebrow" style="margin-bottom:1mm;color:var(--sage-deep)">MVP bet</div><p style="margin:0;color:var(--midnight);font-weight:600">A 6-question intake + 3 explained matches</p><p class="small" style="margin:1mm 0 0">A rules-plus-weights engine, no black-box ML until real outcome data exists.</p></div>
+  <div class="card peach"><div class="eyebrow" style="margin-bottom:1mm;color:var(--peach-deep)">Status</div><p style="margin:0;color:var(--midnight);font-weight:600">Prototype implemented</p><p class="small" style="margin:1mm 0 0">The engine runs live in the Wellbeing Compass prototype (Task 3): <code>lib/matching.ts</code>.</p></div>
+ </div>
+
+ <h2><span class="n">1</span>Problem statement</h2>
+ <p>Today users browse a directory, apply filters and choose a therapist on their own. That works for people who already know what counselling is and what they need. It fails the majority of first-timers in a B2B2C context: employees and students who arrive uncertain, often at a hard moment, and are asked to make an expert judgement (which specialisation? which approach?) before they&rsquo;ve said a word to anyone. The result is <strong>decision friction</strong>: drop-off before booking, poor-fit first sessions, and users who never come back for a second session even though continuity is where counselling value compounds.</p>
+
+ <h2><span class="n">2</span>Core problems</h2>
+ <div class="problem">
+  <div class="card"><h3>Decision paralysis</h3><p>Many similar-looking profiles and no guidance on how to choose; users defer the decision indefinitely.</p></div>
+  <div class="card"><h3>Specialisation jargon</h3><p>&lsquo;CBT&rsquo;, &lsquo;ACT&rsquo; and &lsquo;systemic&rsquo; mean little to a first-timer; users can&rsquo;t map their concern to expertise.</p></div>
+  <div class="card"><h3>Expectation mismatch</h3><p>A user needing sleep and burnout support books a relationship specialist because they were first or most-reviewed.</p></div>
+  <div class="card"><h3>Scheduling friction</h3><p>The &lsquo;right&rsquo; therapist has no slot for 10 days; the user discovers this only after reading profiles.</p></div>
+  <div class="card"><h3>Lack of continuity</h3><p>Nothing nudges a second session with the same person; users re-browse, restart their story, or lapse.</p></div>
+  <div class="card"><h3>Abandonment before booking</h3><p>Each extra decision (filter, profile, slot) is a drop-off point, and emotional effort is already high.</p></div>
+ </div>
+ <p class="small muted" style="margin-top:2mm">Problem framing is based on the assignment brief and common patterns in digital counselling funnels. YourDOST&rsquo;s actual funnel baselines were not available; all targets below are <strong>assumptions to be replaced with measured baselines</strong> in week 1.</p>
+
+ <h2><span class="n">3</span>Target users</h2>
+ <table>
+  <tr><th>Segment</th><th>Context</th><th>What they need from matching</th></tr>
+  <tr><td><strong>First-time employees</strong> <span class="pill">primary</span></td><td>Access via employer benefit; never had counselling; stress, anxiety, workload</td><td>Reassurance, plain-language fit, a slot soon, cost clarity (covered or not)</td></tr>
+  <tr><td><strong>Students</strong> <span class="pill">primary</span></td><td>Via college partnership; exam pressure, relationships, confidence; prefer chat and evenings</td><td>Language and format match, privacy, low commitment</td></tr>
+  <tr><td><strong>Returning users</strong></td><td>Have seen a therapist before (on or off YourDOST)</td><td>Continuity with someone who fits, or a quick rematch without starting over</td></tr>
+ </table>
+ <div class="footer"><span>YourDOST PM Assignment · Task 2 PRD</span><span>Weights and targets are product hypotheses, not clinical claims</span><span>1 / 7</span></div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page">
+ <div class="runhead"><span class="brand"><span class="orb"></span>YourDOST · Task 2</span><span>Users, jobs &amp; journey</span></div>
+ <h2 style="margin-top:0"><span class="n">4</span>Jobs to be done</h2>
+ <table>
+  <tr><th style="width:34%">When&hellip;</th><th style="width:33%">I want to&hellip;</th><th>So that&hellip;</th></tr>
+  <tr><td>I&rsquo;ve decided to try counselling but don&rsquo;t know what kind of help I need</td><td>describe my situation in my own terms and get a short, trustworthy shortlist</td><td>I don&rsquo;t have to become an expert before getting help</td></tr>
+  <tr><td>I&rsquo;m comparing therapists</td><td>understand <em>why</em> each one is suggested for me</td><td>I can choose with confidence instead of guessing</td></tr>
+  <tr><td>I&rsquo;ve had a first session</td><td>easily continue with the same person, or switch without awkwardness</td><td>I make progress without retelling my story</td></tr>
+  <tr><td>(HR / wellbeing lead) I&rsquo;ve bought YourDOST for my organisation</td><td>see more employees reach a helpful second session</td><td>the benefit shows real usage and value, not sign-ups</td></tr>
+ </table>
+
+ <h2><span class="n">5</span>User personas</h2>
+ <div class="persona">
+  <div class="card"><span class="avatar" style="background:radial-gradient(circle at 30% 25%,#fff,#E6DDFB 35%,#B9A5F5)"></span><h3 style="margin-top:0">Priya, 28 · Analyst, Bengaluru</h3><p class="small">First time seeking help. Three months of work stress, poor sleep. Hindi/English. Can only talk after 7 pm.</p><p class="small"><strong>Fear:</strong> &ldquo;What if I pick the wrong person and it&rsquo;s awkward?&rdquo;</p><p class="small" style="margin:0"><strong>Win:</strong> 3 matches with evening slots and a clear reason each.</p></div>
+  <div class="card"><span class="avatar" style="background:radial-gradient(circle at 30% 25%,#fff,#E3F0E8 35%,#A7C9B4)"></span><h3 style="margin-top:0">Arnab, 20 · Student, Kolkata</h3><p class="small">Exam pressure and a breakup. Prefers chat, wants a Bengali speaker, worried about privacy from his college.</p><p class="small"><strong>Fear:</strong> &ldquo;Will the college know?&rdquo;</p><p class="small" style="margin:0"><strong>Win:</strong> language and format honoured; privacy explained up front.</p></div>
+  <div class="card"><span class="avatar" style="background:radial-gradient(circle at 30% 25%,#fff,#FBE7E0 35%,#F1BBAA)"></span><h3 style="margin-top:0">Meenal, 41 · Manager, Pune</h3><p class="small">Saw a therapist via YourDOST last year; felt it wasn&rsquo;t a fit. Now dealing with family strain.</p><p class="small"><strong>Fear:</strong> &ldquo;Starting from scratch again.&rdquo;</p><p class="small" style="margin:0"><strong>Win:</strong> past feedback used, without being shown the same therapist again.</p></div>
+ </div>
+
+ <h2><span class="n">6</span>Proposed user journey</h2>
+ <div class="flow">
+  <div class="s"><span class="t">Entry</span><b>Find someone to talk to</b>From the home screen, Wellbeing Compass, or a campaign link</div>
+  <div class="s"><span class="t">Intake · ~60s</span><b>6 short questions</b>Concern, goal, language, gender (optional), format, availability</div>
+  <div class="s"><span class="t">Match</span><b>3 explained suggestions</b>Each with 2&ndash;3 &lsquo;why&rsquo; reasons and next free slot</div>
+  <div class="s"><span class="t">Decide</span><b>Profile &rarr; slot &rarr; book</b>Or &lsquo;see more&rsquo; or browse all. Never auto-assigned.</div>
+  <div class="s"><span class="t">After session</span><b>3-tap feedback</b>Comfortable? Understood? Continue?</div>
+  <div class="s"><span class="t">Ongoing</span><b>Continue or rematch</b>Same therapist pinned; rematch any time</div>
+ </div>
+ <div class="grid2">
+  <div class="card mist"><h3>Intake design principles</h3><ul class="small"><li>One question per screen, all optional except concern; &lsquo;Prefer not to say&rsquo; everywhere.</li><li>Plain language (&ldquo;What would you like help with?&rdquo;), never clinical labels.</li><li>Prefill from the employer profile only where the user consents (e.g. language).</li><li>Show the privacy promise before the first question.</li></ul></div>
+  <div class="card sage"><h3>Match screen principles</h3><ul class="small"><li>Exactly three suggestions: enough to feel chosen, few enough to decide.</li><li>Reasons are tied to the user&rsquo;s own answers (&ldquo;Speaks Bengali&rdquo;, &ldquo;Evening slots this week&rdquo;).</li><li>No star ratings or popularity ranking as the lead signal.</li><li>&lsquo;None of these feel right&rsquo; leads to rematch or full directory, with no penalty.</li></ul></div>
+ </div>
+ <div class="footer"><span>YourDOST PM Assignment · Task 2 PRD</span><span>Personas are illustrative composites</span><span>2 / 7</span></div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page">
+ <div class="runhead"><span class="brand"><span class="orb"></span>YourDOST · Task 2</span><span>Matching system</span></div>
+ <h2 style="margin-top:0"><span class="n">7</span>Matching algorithm: hybrid, two-stage, explainable</h2>
+ <svg viewBox="0 0 720 150" width="100%" font-family="Plus Jakarta Sans" style="margin:1mm 0 2mm">
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#7770C9"/></marker></defs>
+  <rect x="0" y="20" width="130" height="110" rx="14" fill="#F3EFFD"/><text x="65" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#25243A">User intake</text>
+  <text x="65" y="64" text-anchor="middle" font-size="8.5" fill="#4A4960">concern · goal · language</text><text x="65" y="78" text-anchor="middle" font-size="8.5" fill="#4A4960">gender pref · format</text><text x="65" y="92" text-anchor="middle" font-size="8.5" fill="#4A4960">availability · eligibility</text><text x="65" y="106" text-anchor="middle" font-size="8.5" fill="#4A4960">prior counselling · comms</text>
+  <rect x="0" y="0" width="130" height="16" rx="8" fill="none"/>
+  <line x1="132" y1="75" x2="168" y2="75" stroke="#7770C9" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="172" y="10" width="170" height="130" rx="14" fill="#fff" stroke="#E2DFEA"/><text x="257" y="34" text-anchor="middle" font-size="9" font-weight="800" fill="#554EA8" letter-spacing="1.5">STAGE 1</text><text x="257" y="50" text-anchor="middle" font-size="11.5" font-weight="700" fill="#25243A">Eligibility filter</text>
+  <text x="257" y="70" text-anchor="middle" font-size="8.5" fill="#4A4960">✕ doesn't cover concern</text><text x="257" y="84" text-anchor="middle" font-size="8.5" fill="#4A4960">✕ no slots in window</text><text x="257" y="98" text-anchor="middle" font-size="8.5" fill="#4A4960">✕ fails essential prefs</text><text x="257" y="112" text-anchor="middle" font-size="8.5" fill="#4A4960">✕ not in org benefit</text><text x="257" y="126" text-anchor="middle" font-size="8.5" fill="#4A4960">✕ unverified credentials</text>
+  <line x1="344" y1="75" x2="380" y2="75" stroke="#7770C9" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="384" y="10" width="190" height="130" rx="14" fill="#25243A"/><text x="479" y="34" text-anchor="middle" font-size="9" font-weight="800" fill="#B9A5F5" letter-spacing="1.5">STAGE 2</text><text x="479" y="50" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">Weighted ranking</text>
+  <text x="479" y="72" text-anchor="middle" font-size="8.5" fill="#D9D6F5">score = Σ wᵢ · fᵢ  (0–100)</text><text x="479" y="88" text-anchor="middle" font-size="8.5" fill="#D9D6F5">+ continuity boost</text><text x="479" y="104" text-anchor="middle" font-size="8.5" fill="#D9D6F5">+ diversity guard (top 3)</text><text x="479" y="120" text-anchor="middle" font-size="8.5" fill="#D9D6F5">→ reason strings per factor</text>
+  <line x1="576" y1="75" x2="612" y2="75" stroke="#7770C9" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="616" y="20" width="104" height="110" rx="14" fill="#EAF3EE"/><text x="668" y="50" text-anchor="middle" font-size="11" font-weight="700" fill="#25243A">Top 3</text><text x="668" y="68" text-anchor="middle" font-size="8.5" fill="#3E6B52">+ &#8220;why&#8221; for each</text><text x="668" y="84" text-anchor="middle" font-size="8.5" fill="#3E6B52">+ next slot</text><text x="668" y="100" text-anchor="middle" font-size="8.5" fill="#3E6B52">+ see more</text><text x="668" y="116" text-anchor="middle" font-size="8.5" fill="#3E6B52">user chooses</text>
+ </svg>
+
+ <div class="grid2">
+  <div>
+   <h3>User inputs</h3>
+   <table>
+    <tr><th>Input</th><th>Type</th><th>Use</th></tr>
+    <tr><td>Primary concern</td><td>Single choice (8)</td><td>Hard filter + specialisation fit</td></tr>
+    <tr><td>What they&rsquo;d like help with</td><td>Chips + optional text</td><td>Specialisation fit (sub-areas)</td></tr>
+    <tr><td>Preferred language</td><td>Multi-select</td><td>Hard filter if &lsquo;essential&rsquo;; else scored</td></tr>
+    <tr><td>Therapist gender</td><td>Optional</td><td>Hard filter only if user marks essential</td></tr>
+    <tr><td>Session format</td><td>Video / audio / chat</td><td>Filter or scored</td></tr>
+    <tr><td>Availability</td><td>Time windows</td><td>Filter (no overlap) + scored</td></tr>
+    <tr><td>Budget / org eligibility</td><td>From account</td><td>Hard filter</td></tr>
+    <tr><td>Previous counselling</td><td>Never / before / here</td><td>Experience weighting, continuity</td></tr>
+    <tr><td>Communication style</td><td>Structured &harr; open</td><td>Preference fit (approach)</td></tr>
+   </table>
+  </div>
+  <div>
+   <h3>Therapist attributes</h3>
+   <table>
+    <tr><th>Attribute</th><th>Source &amp; governance</th></tr>
+    <tr><td>Qualifications &amp; verified credentials</td><td>Clinical ops verification; unverified = ineligible</td></tr>
+    <tr><td>Specialisations (primary / secondary)</td><td>Self-declared, approved by clinical lead; max 3 primary</td></tr>
+    <tr><td>Experience</td><td>Years practising + sessions on platform</td></tr>
+    <tr><td>Languages</td><td>Self-declared, spot-checked</td></tr>
+    <tr><td>Availability</td><td>Live calendar, next 14 days</td></tr>
+    <tr><td>Session formats</td><td>Video / audio / chat</td></tr>
+    <tr><td>User feedback</td><td>&lsquo;Felt understood&rsquo; and &lsquo;comfortable&rsquo; (not star ratings), min. 20 responses before use</td></tr>
+    <tr><td>Continuity indicators</td><td>Share of first sessions followed by a second (risk-adjusted)</td></tr>
+   </table>
+  </div>
+ </div>
+ <div class="callout"><strong>Why hybrid, not ML-first:</strong> there is no labelled outcome data yet, the domain is sensitive, and every suggestion must be explainable to users and clinicians. Rules handle safety and eligibility deterministically; transparent weights rank; learning only tunes the weights once outcomes exist.</div>
+ <div class="footer"><span>YourDOST PM Assignment · Task 2 PRD</span><span>Engine reference implementation: lib/matching.ts</span><span>3 / 7</span></div>
+</section>
+
+<!-- PAGE 4 -->
+<section class="page">
+ <div class="runhead"><span class="brand"><span class="orb"></span>YourDOST · Task 2</span><span>Ranking &amp; calibration</span></div>
+ <h2 style="margin-top:0">Stage 2: weighted ranking <span class="pill peach" style="margin-left:2mm">initial hypotheses, not clinically validated</span></h2>
+ <div class="wbar"><span style="width:35%;background:#554EA8">Specialisation 35%</span><span style="width:20%;background:#7770C9">Preference 20%</span><span style="width:15%;background:#9C92E6">Language 15%</span><span style="width:15%;background:#3E6B52">Availability 15%</span><span style="width:10%;background:#7FA88F">Format 10%</span><span style="width:5%;background:#C98A75">5%</span></div>
+ <table>
+  <tr><th>Factor</th><th>Weight</th><th>Scoring (0&ndash;1)</th><th>Reason shown to user</th></tr>
+  <tr><td><strong>Specialisation fit</strong></td><td class="num">35%</td><td>1.0 primary match · 0.85 secondary · 0.5 related area (passes filter via related concern)</td><td>&ldquo;Focuses on sleep&rdquo;</td></tr>
+  <tr><td><strong>User preference fit</strong></td><td class="num">20%</td><td>Approach/communication style match, plus explicit &lsquo;felt understood&rsquo; feedback and continuity rate (shrunk toward the mean for low volume)</td><td>&ldquo;People often say they felt understood&rdquo;</td></tr>
+  <tr><td><strong>Language compatibility</strong></td><td class="num">15%</td><td>1.0 preferred language · 0.6 second language · neutral 1.0 if no preference</td><td>&ldquo;Speaks Bengali&rdquo;</td></tr>
+  <tr><td><strong>Availability</strong></td><td class="num">15%</td><td>Decays with days to first slot inside the user&rsquo;s window (today 1.0 → 5+ days 0.45)</td><td>&ldquo;Has a slot this evening&rdquo;</td></tr>
+  <tr><td><strong>Session format</strong></td><td class="num">10%</td><td>1.0 preferred format · 0.5 acceptable alternative · neutral if none</td><td>&ldquo;Offers chat sessions&rdquo;</td></tr>
+  <tr><td><strong>Relevant experience</strong></td><td class="num">5%</td><td>min(1, years/10); for first-timers, sessions with first-time clients</td><td>(shown in profile)</td></tr>
+ </table>
+ <p class="small">Adjustments: <strong>+15 continuity boost</strong> when the user chose to keep a therapist. <strong>Diversity guard</strong>: the top 3 should not all share one approach or gender unless the user asked. <strong>Capacity guard</strong>: a therapist near weekly capacity is down-weighted so the best-rated aren&rsquo;t overloaded, while still allowing their continuing clients.</p>
+
+ <h3>Worked example (output of the prototype engine)</h3>
+ <p class="small">Concern = <strong>sleep</strong>, no other preferences. Stage 1 keeps <strong>4 of 6</strong> demo therapists (2 don&rsquo;t cover sleep or a related area).</p>
+ <table>
+  <tr><th>Therapist (demo)</th><th>Spec.</th><th>Pref.</th><th>Lang.</th><th>Avail.</th><th>Format</th><th>Exp.</th><th>Score</th><th>Reasons shown</th></tr>
+  <tr class="hl"><td><strong>Rahul B.</strong></td><td class="num">1.00</td><td class="num">0.70</td><td class="num">1.00</td><td class="num">0.85</td><td class="num">1.00</td><td class="num">0.80</td><td class="num"><strong>91</strong></td><td>Focuses on sleep · Available tomorrow · Felt understood</td></tr>
+  <tr><td>Meera I.</td><td class="num">0.50</td><td class="num">0.76</td><td class="num">1.00</td><td class="num">1.00</td><td class="num">1.00</td><td class="num">0.90</td><td class="num">77</td><td>Related concerns · Slot today</td></tr>
+  <tr><td>Sana Q.</td><td class="num">0.50</td><td class="num">0.62</td><td class="num">1.00</td><td class="num">1.00</td><td class="num">1.00</td><td class="num">0.50</td><td class="num">72</td><td>Related concerns · Slot today</td></tr>
+ </table>
+ <p class="small">Adding <em>language = Tamil (essential)</em> leaves only Meera (77). The UI then says so honestly (&ldquo;1 match. Remove the language filter to see 3 more&rdquo;) rather than padding with poor fits.</p>
+
+ <h3>How the weights get calibrated</h3>
+ <div class="grid2">
+  <div class="card mist">
+   <ol class="small">
+    <li><strong>Clinician review (pre-launch):</strong> 3&ndash;5 YourDOST clinical leads rank 30 anonymised intake → shortlist cases; adjust weights until engine-vs-clinician top-3 agreement is at least 70%.</li>
+    <li><strong>Shadow mode (weeks 1&ndash;4):</strong> log engine top-3 next to what users actually pick in the existing directory; no user impact.</li>
+    <li><strong>Outcome labels:</strong> a &lsquo;good match&rsquo; = felt understood (yes) <em>and</em> booked a 2nd session with the same therapist within 21 days.</li>
+   </ol>
+  </div>
+  <div class="card sage">
+   <ol class="small" start="4">
+    <li><strong>Fit weights to outcomes:</strong> a logistic regression of good-match on the six factor scores; use its coefficients to inform (not replace) weights. Re-fit quarterly.</li>
+    <li><strong>A/B test</strong> weight variants on the North Star with guardrails; clinicians sign off on any change over &plusmn;5 points.</li>
+    <li><strong>Fairness audits:</strong> check score distributions by therapist gender, language and tenure so new or minority-language therapists aren&rsquo;t systematically buried.</li>
+   </ol>
+  </div>
+ </div>
+ <div class="footer"><span>YourDOST PM Assignment · Task 2 PRD</span><span>Example uses fictional demo profiles</span><span>4 / 7</span></div>
+</section>
+
+<!-- PAGE 5 -->
+<section class="page">
+ <div class="runhead"><span class="brand"><span class="orb"></span>YourDOST · Task 2</span><span>Matching over time &amp; requirements</span></div>
+ <h2 style="margin-top:0">First-time and continuous matching</h2>
+ <div class="grid3">
+  <div class="card mist"><h3>First session</h3><ul class="small"><li>Short intake (6 questions, ~60s).</li><li>Exactly <strong>3 recommendations</strong>, each with reasons and next slot.</li><li>&lsquo;See more&rsquo; and &lsquo;browse all&rsquo; always visible.</li><li><strong>Never auto-assign</strong>; booking is always the user&rsquo;s tap.</li></ul></div>
+  <div class="card sage"><h3>After the first session</h3><ul class="small"><li>Optional 3-tap check-in: <em>Were you comfortable? Did you feel understood? Continue with them?</em></li><li>&lsquo;Yes&rsquo; to continue pins the therapist and offers their next 3 slots.</li><li>&lsquo;Not really&rsquo; triggers a no-blame rematch excluding that therapist.</li></ul></div>
+  <div class="card peach"><h3>Over time</h3><ul class="small"><li>Prioritise continuity (+15 boost, pinned card).</li><li>Learn from <strong>explicit feedback only</strong>.</li><li>Rematch available any time, from any screen.</li><li><strong>Never treat low engagement as a sign of poor mental health</strong>; silence just means no nudge beyond one gentle reminder.</li></ul></div>
+ </div>
+
+ <h2><span class="n">8</span>Functional requirements</h2>
+ <table class="req">
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-1</td><td>Intake flow: 6 single-screen questions, progress indicator, back/skip, &lsquo;prefer not to say&rsquo;; only concern is required.</td><td><span class="tag p0">P0</span></td></tr>
+  <tr><td>FR-2</td><td>Stage-1 eligibility: concern coverage (incl. related areas), live availability window, essential preferences, org benefit, verified credentials.</td><td><span class="tag p0">P0</span></td></tr>
+  <tr><td>FR-3</td><td>Stage-2 scoring with configurable weights (admin, versioned) and per-factor scores stored for every recommendation.</td><td><span class="tag p0">P0</span></td></tr>
+  <tr><td>FR-4</td><td>Explanations: 2&ndash;3 reason strings per match, generated from factor scores and the user&rsquo;s own inputs.</td><td><span class="tag p0">P0</span></td></tr>
+  <tr><td>FR-5</td><td>Top-3 results with next slot; &lsquo;see more&rsquo;; full directory fallback; empty state when filters exclude all.</td><td><span class="tag p0">P0</span></td></tr>
+  <tr><td>FR-6</td><td>One-tap booking from the match card into the existing booking system.</td><td><span class="tag p0">P0</span></td></tr>
+  <tr><td>FR-7</td><td>Post-session 3-question feedback (optional) and a &lsquo;continue with same therapist&rsquo; pin.</td><td><span class="tag p0">P0</span></td></tr>
+  <tr><td>FR-8</td><td>Rematch flow excluding chosen therapists, preserving intake answers.</td><td><span class="tag p1">P1</span></td></tr>
+  <tr><td>FR-9</td><td>Safety: a crisis keyword or answer bypasses matching and shows human crisis support.</td><td><span class="tag p0">P0</span></td></tr>
+  <tr><td>FR-10</td><td>Analytics events for every funnel step; weights version attached to each event.</td><td><span class="tag p0">P0</span></td></tr>
+  <tr><td>FR-11</td><td>Admin view for clinical ops: therapist attributes, verification state, capacity.</td><td><span class="tag p1">P1</span></td></tr>
+ </table>
+
+ <div class="grid2">
+  <div>
+   <h2><span class="n">9</span>MVP scope (6&ndash;8 weeks)</h2>
+   <ul class="small"><li>FR-1 to FR-7, FR-9, FR-10; rule + weight engine (no ML).</li><li>Feedback-informed preference score (with minimum-volume threshold).</li><li>Continuity pin and simple rematch.</li><li>Shadow-mode logging, then a 50/50 A/B test vs. the current directory.</li><li>Web and app, English + Hindi intake copy.</li></ul>
+  </div>
+  <div>
+   <h2><span class="n">10</span>Out of scope (v1)</h2>
+   <ul class="small"><li>ML / collaborative-filtering recommender (needs outcome data).</li><li>Free-text NLP of user concerns beyond keyword safety screening.</li><li>Clinical assessments or severity scoring inside matching.</li><li>Dynamic pricing or paid-tier steering.</li><li>Group therapy and psychiatrist matching.</li><li>Therapist-side ranking dashboards (risk of gaming the metric).</li></ul>
+  </div>
+ </div>
+ <div class="footer"><span>YourDOST PM Assignment · Task 2 PRD</span><span>Priorities: P0 = MVP launch, P1 = fast follow</span><span>5 / 7</span></div>
+</section>
+
+<!-- PAGE 6 -->
+<section class="page">
+ <div class="runhead"><span class="brand"><span class="orb"></span>YourDOST · Task 2</span><span>Risk, safety &amp; success</span></div>
+ <h2 style="margin-top:0"><span class="n">11</span>Edge cases</h2>
+ <table>
+  <tr><th style="width:32%">Case</th><th>Behaviour</th></tr>
+  <tr><td>No therapist passes Stage 1</td><td>Explain which filter excluded everyone; offer to relax it (e.g. language → &lsquo;preferred&rsquo;); always show human-support contact.</td></tr>
+  <tr><td>Only 1&ndash;2 eligible</td><td>Show what exists honestly; never pad with ineligible profiles.</td></tr>
+  <tr><td>User skips everything except concern</td><td>Neutral scores for unknown preferences; reasons rely on specialisation and availability.</td></tr>
+  <tr><td>&lsquo;Something else&rsquo; concern</td><td>Generalists ranked first; offer a 15-min intake call with a counsellor.</td></tr>
+  <tr><td>Preferred therapist leaves or is full</td><td>Notify, offer the closest match by factor profile, and carry intake answers over.</td></tr>
+  <tr><td>Negative feedback after session 1</td><td>No-blame rematch; exclude that therapist; feedback is not shown to the therapist individually.</td></tr>
+  <tr><td>Crisis language in intake</td><td>Matching stops; crisis panel (112, Tele-MANAS 14416) and the human support team. Ordinary sadness or stress is <em>not</em> treated as crisis.</td></tr>
+  <tr><td>Minors (students under 18)</td><td>Route to therapists approved for minors; follow institutional consent policy.</td></tr>
+  <tr><td>Cold start for new therapists</td><td>Feedback factor uses the platform mean until 20 responses; capped exploration slots in the top 3.</td></tr>
+ </table>
+
+ <div class="grid2">
+  <div>
+   <h2><span class="n">12</span>Privacy &amp; safety</h2>
+   <ul class="small">
+    <li><strong>Employer never sees</strong> individual intake, matches or bookings; only aggregated, k-anonymised (k &ge; 10) usage.</li>
+    <li>Intake stored separately from identity, encrypted at rest; free text not retained after matching.</li>
+    <li>Matching is a navigation aid, not a clinical decision; clinicians can override and audit.</li>
+    <li>No diagnosis labels or severity scores anywhere in the flow.</li>
+    <li>Explicit consent for using feedback to improve matches; user can delete history.</li>
+    <li>Compliant with India&rsquo;s DPDP Act 2023 principles: purpose limitation, minimisation, consent.</li>
+   </ul>
+  </div>
+  <div>
+   <h2>Rollout</h2>
+   <ul class="small">
+    <li><strong>Wk 0&ndash;2:</strong> baselines, clinician calibration, copy testing with 8&ndash;10 users.</li>
+    <li><strong>Wk 3&ndash;4:</strong> shadow mode.</li>
+    <li><strong>Wk 5&ndash;8:</strong> A/B test, 2 pilot corporate clients, 50% of first-time users.</li>
+    <li><strong>Decision rule:</strong> ship if continuity improves with no guardrail breach; otherwise iterate on weights and copy.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="footer"><span>YourDOST PM Assignment · Task 2 PRD</span><span>Crisis numbers: public Government of India services</span><span>6 / 7</span></div>
+</section>
+
+<!-- PAGE 7 -->
+<section class="page">
+ <div class="runhead"><span class="brand"><span class="orb"></span>YourDOST · Task 2</span><span>Measuring success</span></div>
+ <h2 style="margin-top:0">Success metrics</h2>
+ <div class="grid2">
+  <table>
+   <tr><th colspan="2">Engagement &amp; funnel (product metrics)</th></tr>
+   <tr class="hl"><td><strong>North Star:</strong> first-session &rarr; follow-up continuity</td><td>2nd session, same therapist, &le;21 days</td></tr>
+   <tr><td>Onboarding completion</td><td>started → finished intake</td></tr>
+   <tr><td>Recommendation &rarr; profile</td><td>matches viewed → profile opened</td></tr>
+   <tr><td>Profile &rarr; booking</td><td>profile → booked</td></tr>
+   <tr><td>Booking completion</td><td>booked → attended</td></tr>
+   <tr><td>Time to first session</td><td>median hours, intake → session</td></tr>
+   <tr><td>1st &rarr; 2nd session continuation</td><td>any therapist</td></tr>
+  </table>
+  <table>
+   <tr><th colspan="2">Experience &amp; outcomes (user-reported)</th></tr>
+   <tr><td>User-reported therapist fit</td><td>&lsquo;felt understood&rsquo; yes-rate</td></tr>
+   <tr><td>User-reported helpfulness</td><td>&lsquo;session helped&rsquo; (1&ndash;5)</td></tr>
+   <tr><td>Wellbeing outcome <span class="muted">(separate, clinical)</span></td><td>validated measure (e.g. WHO-5) at session 1 vs 4, owned by clinical team; never a product KPI target</td></tr>
+   <tr><th colspan="2">Guardrails (must not worsen)</th></tr>
+   <tr><td>Cancellation rate · No-show rate</td><td>vs. directory control</td></tr>
+   <tr><td>Rematch rate</td><td>high = poor fit; zero = rematch hidden</td></tr>
+   <tr><td>User complaints · Privacy incidents</td><td>zero-tolerance on privacy</td></tr>
+  </table>
+ </div>
+ <p class="small muted">Engagement metrics show that matching makes good support easier to reach. They are not evidence that people are getting better. Clinical outcomes are tracked separately, by clinicians, with validated instruments, and are never optimised directly by the ranking.</p>
+
+ <h2>Metric definitions &amp; instrumentation</h2>
+ <table>
+  <tr><th>Metric</th><th>Event(s)</th><th>Why it matters</th></tr>
+  <tr><td><strong>Continuity rate (NS)</strong></td><td><code>session_completed</code> &rarr; <code>booking_created</code> (same therapist, &le;21d)</td><td>Captures both fit and value; hard to game without users genuinely returning</td></tr>
+  <tr><td>Recommendation &rarr; profile</td><td><code>match_shown</code>, <code>profile_opened</code> (with rank 1/2/3)</td><td>Are the explanations persuasive? Rank-3 clicks signal weak top ranking</td></tr>
+  <tr><td>Time to first session</td><td><code>intake_started</code> &rarr; <code>session_started</code></td><td>Availability weighting should cut waiting time</td></tr>
+  <tr><td>Therapist fit</td><td><code>feedback_submitted</code> (understood / comfortable)</td><td>The primary calibration label for weights</td></tr>
+ </table>
+
+ <div class="grid2">
+  <div>
+   <h2>Risks &amp; mitigations</h2>
+   <table>
+    <tr><th>Risk</th><th>Mitigation</th></tr>
+    <tr><td>Popularity loop: good therapists overloaded</td><td>Capacity guard; feedback shrinkage; exploration slots</td></tr>
+    <tr><td>Users feel &lsquo;sorted by a machine&rsquo;</td><td>Human copy, visible reasons, full directory one tap away</td></tr>
+    <tr><td>Therapists game declared specialisations</td><td>Clinical approval, max 3 primary, audit vs. outcomes</td></tr>
+    <tr><td>Optimising engagement over care</td><td>Clinical outcomes owned separately; guardrails block launch</td></tr>
+   </table>
+  </div>
+  <div>
+   <h2>Open questions</h2>
+   <ul class="small">
+    <li>What are today&rsquo;s baselines for intake-to-booking and 2nd-session rates per corporate client?</li>
+    <li>Do therapists already tag specialisations consistently, or is a taxonomy clean-up needed first?</li>
+    <li>Can employer eligibility be resolved in real time from the benefits system?</li>
+    <li>Which clinical lead owns weight sign-off and the outcome-measure protocol?</li>
+    <li>Should students see different defaults (chat-first, evening slots)?</li>
+   </ul>
+  </div>
+ </div>
+ <div class="footer"><span>YourDOST PM Assignment · Task 2 PRD</span><span>Targets set after week-1 baseline measurement</span><span>7 / 7</span></div>
+
+</section>
+</body></html>

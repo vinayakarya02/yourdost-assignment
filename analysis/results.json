@@ -1,0 +1,625 @@
+{
+  "meta": {
+    "raw_rows": 100,
+    "raw_columns": 38,
+    "collection_window": [
+      "2020-12-01 12:23:17.183000",
+      "2020-12-03 10:40:58.585000"
+    ],
+    "plays_counts": {
+      "Yes": 45,
+      "No": 33,
+      "Sometimes": 22
+    },
+    "exact_duplicate_rows": 0,
+    "duplicate_timestamps": 0,
+    "no_rows_all_blank_after_q1": 33,
+    "analysable_n": 67,
+    "missing_in_required_grids": {
+      "beneficial": 0,
+      "stress_buster": 0,
+      "socialize": 0,
+      "career": 0,
+      "needs_supervision": 0,
+      "distraction": 0,
+      "violent": 0,
+      "dangerous": 0,
+      "waste_money": 0,
+      "f_addictive": 0,
+      "f_aggression": 0,
+      "f_content": 0,
+      "f_academic": 0,
+      "f_health": 0,
+      "i_frustration": 0,
+      "i_conflict": 0,
+      "i_strain": 0,
+      "played_self": 0,
+      "know_fav": 0,
+      "understand_why": 0,
+      "played_with_kid": 0,
+      "not_interested": 0,
+      "rules_necessary": 0
+    },
+    "missing_in_rules_grid": {
+      "r_days": 3,
+      "r_times": 1,
+      "r_duration": 1,
+      "r_exams": 1,
+      "r_kinds": 1,
+      "r_money": 3,
+      "r_none": 2
+    },
+    "contradiction_no_rules_but_lists_rules": 10,
+    "kids_age_infant_n": 1
+  },
+  "attitudes": {
+    "beneficial": {
+      "agree": {
+        "num": 26,
+        "den": 67,
+        "pct": 38.8
+      },
+      "disagree": {
+        "num": 16,
+        "den": 67,
+        "pct": 23.9
+      },
+      "neutral": {
+        "num": 25,
+        "den": 67,
+        "pct": 37.3
+      }
+    },
+    "stress_buster": {
+      "agree": {
+        "num": 37,
+        "den": 67,
+        "pct": 55.2
+      },
+      "disagree": {
+        "num": 8,
+        "den": 67,
+        "pct": 11.9
+      },
+      "neutral": {
+        "num": 22,
+        "den": 67,
+        "pct": 32.8
+      }
+    },
+    "socialize": {
+      "agree": {
+        "num": 19,
+        "den": 67,
+        "pct": 28.4
+      },
+      "disagree": {
+        "num": 31,
+        "den": 67,
+        "pct": 46.3
+      },
+      "neutral": {
+        "num": 17,
+        "den": 67,
+        "pct": 25.4
+      }
+    },
+    "career": {
+      "agree": {
+        "num": 20,
+        "den": 67,
+        "pct": 29.9
+      },
+      "disagree": {
+        "num": 30,
+        "den": 67,
+        "pct": 44.8
+      },
+      "neutral": {
+        "num": 17,
+        "den": 67,
+        "pct": 25.4
+      }
+    },
+    "needs_supervision": {
+      "agree": {
+        "num": 48,
+        "den": 67,
+        "pct": 71.6
+      },
+      "disagree": {
+        "num": 6,
+        "den": 67,
+        "pct": 9.0
+      },
+      "neutral": {
+        "num": 13,
+        "den": 67,
+        "pct": 19.4
+      }
+    },
+    "distraction": {
+      "agree": {
+        "num": 58,
+        "den": 67,
+        "pct": 86.6
+      },
+      "disagree": {
+        "num": 5,
+        "den": 67,
+        "pct": 7.5
+      },
+      "neutral": {
+        "num": 4,
+        "den": 67,
+        "pct": 6.0
+      }
+    },
+    "violent": {
+      "agree": {
+        "num": 31,
+        "den": 67,
+        "pct": 46.3
+      },
+      "disagree": {
+        "num": 7,
+        "den": 67,
+        "pct": 10.4
+      },
+      "neutral": {
+        "num": 29,
+        "den": 67,
+        "pct": 43.3
+      }
+    },
+    "dangerous": {
+      "agree": {
+        "num": 45,
+        "den": 67,
+        "pct": 67.2
+      },
+      "disagree": {
+        "num": 9,
+        "den": 67,
+        "pct": 13.4
+      },
+      "neutral": {
+        "num": 13,
+        "den": 67,
+        "pct": 19.4
+      }
+    },
+    "waste_money": {
+      "agree": {
+        "num": 27,
+        "den": 67,
+        "pct": 40.3
+      },
+      "disagree": {
+        "num": 16,
+        "den": 67,
+        "pct": 23.9
+      },
+      "neutral": {
+        "num": 24,
+        "den": 67,
+        "pct": 35.8
+      }
+    }
+  },
+  "fear": {
+    "f_addictive": {
+      "high": {
+        "num": 38,
+        "den": 67,
+        "pct": 56.7
+      },
+      "high_or_medium": {
+        "num": 63,
+        "den": 67,
+        "pct": 94.0
+      }
+    },
+    "f_aggression": {
+      "high": {
+        "num": 21,
+        "den": 67,
+        "pct": 31.3
+      },
+      "high_or_medium": {
+        "num": 53,
+        "den": 67,
+        "pct": 79.1
+      }
+    },
+    "f_content": {
+      "high": {
+        "num": 27,
+        "den": 67,
+        "pct": 40.3
+      },
+      "high_or_medium": {
+        "num": 59,
+        "den": 67,
+        "pct": 88.1
+      }
+    },
+    "f_academic": {
+      "high": {
+        "num": 35,
+        "den": 67,
+        "pct": 52.2
+      },
+      "high_or_medium": {
+        "num": 61,
+        "den": 67,
+        "pct": 91.0
+      }
+    },
+    "f_health": {
+      "high": {
+        "num": 28,
+        "den": 67,
+        "pct": 41.8
+      },
+      "high_or_medium": {
+        "num": 56,
+        "den": 67,
+        "pct": 83.6
+      }
+    }
+  },
+  "role": {
+    "played_self": {
+      "num": 41,
+      "den": 67,
+      "pct": 61.2
+    },
+    "know_fav": {
+      "num": 47,
+      "den": 67,
+      "pct": 70.1
+    },
+    "understand_why": {
+      "num": 53,
+      "den": 67,
+      "pct": 79.1
+    },
+    "played_with_kid": {
+      "num": 32,
+      "den": 67,
+      "pct": 47.8
+    },
+    "not_interested": {
+      "num": 35,
+      "den": 67,
+      "pct": 52.2
+    },
+    "rules_necessary": {
+      "num": 65,
+      "den": 67,
+      "pct": 97.0
+    }
+  },
+  "rules": {
+    "r_days": {
+      "num": 25,
+      "den": 64,
+      "pct": 39.1
+    },
+    "r_times": {
+      "num": 34,
+      "den": 66,
+      "pct": 51.5
+    },
+    "r_duration": {
+      "num": 35,
+      "den": 66,
+      "pct": 53.0
+    },
+    "r_exams": {
+      "num": 35,
+      "den": 66,
+      "pct": 53.0
+    },
+    "r_kinds": {
+      "num": 40,
+      "den": 66,
+      "pct": 60.6
+    },
+    "r_money": {
+      "num": 32,
+      "den": 64,
+      "pct": 50.0
+    }
+  },
+  "impact": {
+    "i_frustration": {
+      "medium_or_high": {
+        "num": 42,
+        "den": 67,
+        "pct": 62.7
+      },
+      "none": {
+        "num": 6,
+        "den": 67,
+        "pct": 9.0
+      }
+    },
+    "i_conflict": {
+      "medium_or_high": {
+        "num": 37,
+        "den": 67,
+        "pct": 55.2
+      },
+      "none": {
+        "num": 10,
+        "den": 67,
+        "pct": 14.9
+      }
+    },
+    "i_strain": {
+      "medium_or_high": {
+        "num": 36,
+        "den": 67,
+        "pct": 53.7
+      },
+      "none": {
+        "num": 13,
+        "den": 67,
+        "pct": 19.4
+      }
+    }
+  },
+  "demographics": {
+    "gender": {
+      "Female": 43,
+      "Male": 24
+    },
+    "kid_age": {
+      "School Age (6-12 years old)": 25,
+      "Adults (18 years and above)": 23,
+      "Adolescents (13-17 years old)": 10,
+      "Pre-school (4-5 years old)": 8,
+      "Infants/Toddlers (0-3 years old)": 1
+    },
+    "income": {
+      "Between ₹70,000 and ₹2,70,000": 23,
+      "Between ₹2,70,000 and ₹8,45,000": 18,
+      "More than ₹8,45,000": 14,
+      "Less than ₹70,000": 12
+    },
+    "occupation": {
+      "Working Professional": 28,
+      "Housewife": 12,
+      "Entrepreneur": 10,
+      "Retiree": 9,
+      "Unemployed": 6,
+      "Teacher": 2
+    },
+    "city": {
+      "Other": 19,
+      "Kolkata": 17,
+      "Bangalore": 14,
+      "Delhi": 6,
+      "Mumbai": 5,
+      "Hyderabad": 3,
+      "Chennai": 2,
+      "Pune": 1
+    },
+    "plays": {
+      "Yes": 45,
+      "Sometimes": 22
+    }
+  },
+  "I1_ambivalence": {
+    "distraction_agree": {
+      "num": 58,
+      "den": 67,
+      "pct": 86.6
+    },
+    "stress_buster_agree": {
+      "num": 37,
+      "den": 67,
+      "pct": 55.2
+    },
+    "both_agree": {
+      "num": 35,
+      "den": 67,
+      "pct": 52.2
+    },
+    "share_of_stress_buster_agreers_who_also_say_distraction": {
+      "num": 35,
+      "den": 37,
+      "pct": 94.6
+    }
+  },
+  "I2_fear_ranking": {
+    "f_addictive": {
+      "num": 38,
+      "den": 67,
+      "pct": 56.7
+    },
+    "f_aggression": {
+      "num": 21,
+      "den": 67,
+      "pct": 31.3
+    },
+    "f_content": {
+      "num": 27,
+      "den": 67,
+      "pct": 40.3
+    },
+    "f_academic": {
+      "num": 35,
+      "den": 67,
+      "pct": 52.2
+    },
+    "f_health": {
+      "num": 28,
+      "den": 67,
+      "pct": 41.8
+    }
+  },
+  "I3_rules_gap": {
+    "rules_necessary": {
+      "num": 65,
+      "den": 67,
+      "pct": 97.0
+    },
+    "no_specific_rule_among_rules_necessary": {
+      "num": 12,
+      "den": 65,
+      "pct": 18.5
+    },
+    "rule_count_distribution": {
+      "0": 13,
+      "1": 5,
+      "2": 11,
+      "3": 5,
+      "4": 16,
+      "5": 7,
+      "6": 10
+    }
+  },
+  "I4_fear_conflict": {
+    "spearman_fear_index_vs_family_impact_index": {
+      "rho": 0.57,
+      "p": 0.0,
+      "n": 67
+    },
+    "conflict_medium_high_if_high_addiction_fear": {
+      "num": 24,
+      "den": 38,
+      "pct": 63.2
+    },
+    "conflict_medium_high_if_not_high_addiction_fear": {
+      "num": 13,
+      "den": 29,
+      "pct": 44.8
+    }
+  },
+  "I4_rules_vs_impact": {
+    "spearman_rule_count_vs_impact_index": {
+      "rho": 0.08,
+      "p": 0.542,
+      "n": 67
+    },
+    "conflict_medium_high_if_has_rule": {
+      "num": 31,
+      "den": 54,
+      "pct": 57.4
+    },
+    "conflict_medium_high_if_no_rule": {
+      "num": 6,
+      "den": 13,
+      "pct": 46.2
+    },
+    "fisher_p": 0.542
+  },
+  "I5_understanding": {
+    "high_fear_index_if_understands_why": {
+      "num": 15,
+      "den": 53,
+      "pct": 28.3
+    },
+    "high_fear_index_if_does_not_understand": {
+      "num": 8,
+      "den": 14,
+      "pct": 57.1
+    },
+    "mean_fear_index_understands": 2.21,
+    "mean_fear_index_not_understands": 2.57,
+    "mannwhitney_p": 0.037,
+    "played_with_kid": {
+      "num": 32,
+      "den": 67,
+      "pct": 47.8
+    },
+    "not_interested_in_learning": {
+      "num": 35,
+      "den": 67,
+      "pct": 52.2
+    },
+    "cant_name_a_game": {
+      "num": 7,
+      "den": 67,
+      "pct": 10.4
+    },
+    "mean_fear_index_played_with_kid": 2.14,
+    "mean_fear_index_not_played_with_kid": 2.42,
+    "played_with_kid_mannwhitney_p": 0.059
+  },
+  "I6_gender": {
+    "beneficial_agree_fathers": {
+      "num": 13,
+      "den": 24,
+      "pct": 54.2
+    },
+    "beneficial_agree_mothers": {
+      "num": 13,
+      "den": 43,
+      "pct": 30.2
+    },
+    "mean_benefit_index_fathers": 0.45,
+    "mean_benefit_index_mothers": -0.21,
+    "mannwhitney_p": 0.006,
+    "high_addiction_fear_fathers": {
+      "num": 12,
+      "den": 24,
+      "pct": 50.0
+    },
+    "high_addiction_fear_mothers": {
+      "num": 26,
+      "den": 43,
+      "pct": 60.5
+    }
+  },
+  "by_kid_age": {
+    "Adolescents (13-17 years old)": {
+      "n": 10,
+      "mean_fear_index": 1.96,
+      "high_addiction_fear": {
+        "num": 4,
+        "den": 10,
+        "pct": 40.0
+      }
+    },
+    "Adults (18 years and above)": {
+      "n": 23,
+      "mean_fear_index": 2.26,
+      "high_addiction_fear": {
+        "num": 16,
+        "den": 23,
+        "pct": 69.6
+      }
+    },
+    "Infants/Toddlers (0-3 years old)": {
+      "n": 1,
+      "mean_fear_index": 1.8,
+      "high_addiction_fear": {
+        "num": 0,
+        "den": 1,
+        "pct": 0.0
+      }
+    },
+    "Pre-school (4-5 years old)": {
+      "n": 8,
+      "mean_fear_index": 2.12,
+      "high_addiction_fear": {
+        "num": 2,
+        "den": 8,
+        "pct": 25.0
+      }
+    },
+    "School Age (6-12 years old)": {
+      "n": 25,
+      "mean_fear_index": 2.51,
+      "high_addiction_fear": {
+        "num": 16,
+        "den": 25,
+        "pct": 64.0
+      }
+    }
+  }
+}

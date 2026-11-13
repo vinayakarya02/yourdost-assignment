@@ -1,0 +1,88 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Task 1 – Parents and online gaming: analysis</title>
+<link rel="stylesheet" href="atmosphere.css"><style>body{font-size:8.6pt;line-height:1.45} table{font-size:7.8pt} td{padding:1.15mm 1.8mm} h2{margin:3.5mm 0 1.6mm;font-size:11.5pt} h1{font-size:23pt} .lead{font-size:9.8pt} li{margin-bottom:.5mm}</style></head><body>
+<section class="page">
+ <div class="runhead"><span class="brand"><span class="orb"></span>YourDOST · Task 1</span><span>Supporting analysis</span></div>
+ <div class="eyebrow">Parents &amp; online gaming survey</div>
+ <h1>Parents aren&rsquo;t anti-gaming. <em>They&rsquo;re anxious.</em></h1>
+ <p class="lead">Five evidence-backed insights from 67 parents whose children play online games, with the exact calculations, what they mean and what YourDOST and parents can do with them.</p>
+
+ <div class="grid2" style="margin-top:4mm">
+  <div>
+   <h2><span class="n">1</span>Research objective</h2>
+   <p>Understand how parents perceive online gaming, what worries them, how they intervene, and how those worries relate to family life, to shape parent-facing wellbeing content and campaigns on YourDOST.</p>
+   <h2><span class="n">2</span>Dataset overview</h2>
+   <table><tr><th>Item</th><th>Value</th></tr>
+    <tr><td>Source</td><td>Google Form &rarr; linked Sheet (re-downloaded and matched to the local copy cell for cell)</td></tr>
+    <tr><td>Responses</td><td class="num">100 rows &times; 38 columns</td></tr>
+    <tr><td>Collected</td><td>1&ndash;3 December 2020</td></tr>
+    <tr class="hl"><td><strong>Analysed</strong></td><td><strong>67</strong> (45 &lsquo;Yes&rsquo; + 22 &lsquo;Sometimes&rsquo;)</td></tr>
+    <tr><td>Respondents</td><td>43 women, 24 men; cities: Other 19, Kolkata 17, Bangalore 14, rest &le;6 each</td></tr>
+    <tr><td>Question blocks</td><td>9 attitude items (5-pt agree), 5 fear items (4-pt), 6 role items &amp; 7 rule items (True/False), 3 family-impact items (4-pt), 5 demographics</td></tr>
+   </table>
+  </div>
+  <div>
+   <h2><span class="n">3</span>Cleaning &amp; validation</h2>
+   <ul>
+    <li><strong>Routing check:</strong> all 33 &lsquo;No, my child doesn&rsquo;t play&rsquo; rows are blank after Q1. The form sent them straight to submit, so they are excluded rather than imputed.</li>
+    <li><strong>Duplicates:</strong> 0 exact duplicates and 0 repeated timestamps.</li>
+    <li><strong>Missing values:</strong> none in attitude, fear, role or impact grids. The rules grid has 1&ndash;3 blanks per item, so rule percentages use the answered base.</li>
+    <li><strong>Inconsistency:</strong> 10 parents ticked &lsquo;I have no rules whatsoever&rsquo; <em>and</em> at least one specific rule. A parent is counted as having rules if any specific rule is True.</li>
+    <li><strong>Encoding:</strong> Likert &minus;2&hellip;+2; fear and impact 0&ndash;3; True/False &rarr; 1/0. Indices are item means: fear (5 items), family impact (3), perceived benefit (4).</li>
+    <li><strong>Not available:</strong> the form has <strong>no gaming-duration question</strong>, so no duration analysis is attempted.</li>
+   </ul>
+   <div class="callout small">Reproducible: <code>python analysis/analysis.py</code> writes <code>survey_clean.csv</code> and <code>results.json</code>. Every figure in this document and the infographic is generated from that file.</div>
+  </div>
+ </div>
+
+ <h2><span class="n">4</span>Key insights</h2>
+ <table>
+  <tr><th style="width:36%">Finding</th><th>Calculation</th><th>Result</th><th style="width:33%">Why it matters</th></tr>
+  <tr><td><strong>1. Ambivalence, not opposition.</strong> Most see gaming as a distraction, and most of those who value it as a stress-buster hold both views.</td><td class="num">distraction 58/67<br>stress-buster 37/67<br>both 35/67</td><td class="num"><strong>86.6%</strong><br>55.2%<br>52.2%</td><td>Ban-style messaging will miss parents who already see value. Content should help them balance, not choose sides.</td></tr>
+  <tr><td><strong>2. Fear centres on addiction and grades.</strong> Violence-related fear ranks last.</td><td class="num">high fear: addiction 38/67<br>academics 35/67<br>aggression 21/67</td><td class="num"><strong>56.7%</strong><br>52.2%<br>31.3%</td><td>Prioritise content on healthy habits and study balance over violence.</td></tr>
+  <tr class="hl"><td><strong>3. Fear travels with family conflict.</strong></td><td class="num">conflict med/high:<br>high addiction fear 24/38<br>others 13/29<br>&rho;(fear, impact) = 0.57, n=67</td><td class="num"><strong>63.2%</strong><br>vs 44.8%</td><td>Correlation only: fear may cause conflict, conflict may raise fear, or both may stem from heavier play. Either way, anxious parents are a natural audience for family-communication support.</td></tr>
+  <tr><td><strong>4. Belief in rules is near-universal; rules don&rsquo;t track calmer homes.</strong></td><td class="num">rules necessary 65/67<br>believe but have none 12/65<br>conflict: rules 31/54 vs none 6/13</td><td class="num"><strong>97%</strong><br>18.5%<br>57.4% vs 46.2%<br><span class="muted">p = 0.54</span></td><td>Rules alone aren&rsquo;t associated with less conflict, and the no-rules group is small (n=13). The gap between intent and action is a coaching opportunity.</td></tr>
+  <tr><td><strong>5. Understanding is linked to lower fear.</strong></td><td class="num">high fear index:<br>don&rsquo;t understand 8/14<br>understand 15/53</td><td class="num"><strong>57.1%</strong><br>vs 28.3%<br><span class="muted">p = 0.037</span></td><td>The most actionable lever: helping parents understand <em>why</em> children play is cheap and scalable.</td></tr>
+ </table>
+ <div class="footer"><span>YourDOST PM Assignment · Task 1 analysis</span><span>Source data: YourDOST parent survey (n=67 analysed of 100)</span><span>1 / 2</span></div>
+</section>
+
+<section class="page">
+ <div class="runhead"><span class="brand"><span class="orb"></span>YourDOST · Task 1</span><span>Supporting analysis</span></div>
+ <div class="grid2">
+  <div class="card">
+   <h3>High fear by concern <span class="muted small">(share of 67 parents)</span></h3>
+   <svg viewBox="0 0 340 110" width="100%" font-family="Plus Jakarta Sans"><defs><linearGradient id="g"><stop offset="0" stop-color="#7770C9"/><stop offset="1" stop-color="#B9A5F5"/></linearGradient></defs><g transform="translate(0,0)"><text x="0" y="12" font-size="9.5" fill="#4A4960">Addiction</text><rect x="118" y="4" width="150" height="9" rx="4.5" fill="#EEEDF2"/><rect x="118" y="4" width="85.1" height="9" rx="4.5" fill="url(#g)"/><text x="274" y="12" font-size="9.5" font-weight="700" fill="#25243A">56.7%</text><text x="310" y="12" font-size="8.5" fill="#6B6A80">38/67</text></g><g transform="translate(0,22)"><text x="0" y="12" font-size="9.5" fill="#4A4960">Academic performance</text><rect x="118" y="4" width="150" height="9" rx="4.5" fill="#EEEDF2"/><rect x="118" y="4" width="78.3" height="9" rx="4.5" fill="url(#g)"/><text x="274" y="12" font-size="9.5" font-weight="700" fill="#25243A">52.2%</text><text x="310" y="12" font-size="8.5" fill="#6B6A80">35/67</text></g><g transform="translate(0,44)"><text x="0" y="12" font-size="9.5" fill="#4A4960">Health effects</text><rect x="118" y="4" width="150" height="9" rx="4.5" fill="#EEEDF2"/><rect x="118" y="4" width="62.7" height="9" rx="4.5" fill="url(#g)"/><text x="274" y="12" font-size="9.5" font-weight="700" fill="#25243A">41.8%</text><text x="310" y="12" font-size="8.5" fill="#6B6A80">28/67</text></g><g transform="translate(0,66)"><text x="0" y="12" font-size="9.5" fill="#4A4960">Inappropriate content</text><rect x="118" y="4" width="150" height="9" rx="4.5" fill="#EEEDF2"/><rect x="118" y="4" width="60.4" height="9" rx="4.5" fill="url(#g)"/><text x="274" y="12" font-size="9.5" font-weight="700" fill="#25243A">40.3%</text><text x="310" y="12" font-size="8.5" fill="#6B6A80">27/67</text></g><g transform="translate(0,88)"><text x="0" y="12" font-size="9.5" fill="#4A4960">Aggressive behaviour</text><rect x="118" y="4" width="150" height="9" rx="4.5" fill="#EEEDF2"/><rect x="118" y="4" width="47.0" height="9" rx="4.5" fill="url(#g)"/><text x="274" y="12" font-size="9.5" font-weight="700" fill="#25243A">31.3%</text><text x="310" y="12" font-size="8.5" fill="#6B6A80">21/67</text></g></svg>
+  </div>
+  <div class="card mist">
+   <h3>Unexpected pattern: fathers see more upside</h3>
+   <p>Fathers agree more often that gaming can be beneficial: <strong>54.2%</strong> (13/24) vs <strong>30.2%</strong> (13/43) of mothers. The mean benefit index is +0.45 vs -0.21 (Mann-Whitney p = 0.006). Mothers report high addiction fear slightly more often (60.5% vs 50%).</p>
+  </div>
+ </div>
+
+ <h2><span class="n">5</span>Interpretation</h2>
+ <p>The picture is <strong>worry without hostility</strong>. Parents recognise both sides of gaming, but their fears concentrate on the things that feel out of their control: compulsive use and slipping grades. Fear and family friction move together. And while almost every parent believes in rules, households with rules report no less conflict than those without. What <em>is</em> associated with lower fear is understanding: knowing why the child plays. Parents who have played with their child (32/67) also average a lower fear index (2.14 vs 2.42 on a 0&ndash;3 scale), though that gap is only borderline (p = 0.059). Yet 52.2% (35/67) say they aren&rsquo;t interested in learning about games, which is the gap to close.</p>
+ <div class="callout"><strong>Correlation, not causation.</strong> This is a cross-sectional, self-reported survey. We cannot say rules fail, or that understanding <em>reduces</em> fear. Calmer, more curious parents may simply be both less fearful and more engaged.</div>
+
+ <h2><span class="n">6</span>Limitations &amp; potential biases</h2>
+ <div class="grid2">
+  <ul>
+   <li><strong>Small sample:</strong> n=67; subgroup cells are small (e.g. no-rules n=13, adolescents&rsquo; parents n=10). Age-group differences are not reported as findings.</li>
+   <li><strong>Convenience sample:</strong> skewed to women (43/67), Kolkata and Bangalore; not representative of Indian parents.</li>
+   <li><strong>Timing:</strong> collected during COVID-19 restrictions (Dec 2020), when screen time and family stress were unusually high.</li>
+  </ul>
+  <ul>
+   <li><strong>Self-report and social desirability:</strong> parents may over-report rules and under-report conflict.</li>
+   <li><strong>Survey design:</strong> no measure of actual gaming time; a single &lsquo;age group&rsquo; field for families with several children; some data-quality issues (e.g. 10 contradictory rule answers, 1 parent of a 0&ndash;3-year-old reporting gaming).</li>
+   <li><strong>Multiple comparisons:</strong> several tests were run; p-values near .05 should be read as directional.</li>
+  </ul>
+ </div>
+
+ <h2><span class="n">7</span>Recommendations</h2>
+ <div class="grid3">
+  <div class="card sage"><h3>For parents</h3><ul class="small"><li>Ask your child what they enjoy about their favourite game, then play it once together.</li><li>Agree a few rules <em>with</em> your child (timing, exams, spending) instead of announcing them.</li><li>Notice your own worry; anxious conversations tend to escalate.</li></ul></div>
+  <div class="card mist"><h3>For YourDOST content</h3><ul class="small"><li>A &lsquo;Curiosity before control&rsquo; parent series: short videos on why kids play and how to talk about it.</li><li>Lead campaigns with addiction and study-balance, not violence.</li><li>A gaming-and-family self-reflection that routes high-worry parents to counselling.</li></ul></div>
+  <div class="card peach"><h3>For B2B programmes &amp; research</h3><ul class="small"><li>Offer a parent-wellbeing module in employer campaigns (working parents were 28/67).</li><li>Re-run with gaming hours, child-level age and a larger, balanced sample.</li><li>Pilot a family-communication workshop and measure change in parent-reported conflict.</li></ul></div>
+ </div>
+ <div class="footer"><span>YourDOST PM Assignment · Task 1 analysis</span><span>All figures generated by analysis/analysis.py → results.json</span><span>2 / 2</span></div>
+</section>
+</body></html>
